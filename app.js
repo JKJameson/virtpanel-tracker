@@ -9,7 +9,7 @@ var server = new Server({
   stats: false, // enable web-based statistics? [default=true]
   trustProxy: true,
   filter: function (infoHash, params, cb) {
-	var hash = path.basename(infoHash).toUpperCase();
+    var hash = path.basename(infoHash).toUpperCase()
     if (hash.length==40 && fs.existsSync('/tracker/'+hash)) {
       // If the callback is passed `null`, the torrent will be allowed.
       cb(null)
@@ -25,13 +25,6 @@ server.on('error', function (err) {
   // fatal server error!
   console.log(err.message)
 })
-
-/*
-server.on('warning', function (err) {
-  // client sent bad data. probably not a problem, just a buggy client.
-  console.log(err.message)
-})
-*/
 
 server.on('listening', function () {
   console.log('listening on http port:' + server.http.address().port)
